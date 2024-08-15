@@ -28,7 +28,3 @@ def get_user_data(username):
     query = f"SELECT * FROM users WHERE username = '{username}'"  # Vulnerable to SQL injection
     cursor.execute(query)
     return cursor.fetchall()
-
-
-def insecure_function(data):
-    eval(data)  # Potentially dangerous use of eval()
