@@ -22,6 +22,10 @@ async def read_root():
     return {"Hello": "World"}
 
 
+def insecure_function(data):
+    eval(data)
+
+
 def get_user_data(username):
     print(username)
     conn = sqlite3.connect("example.db")
