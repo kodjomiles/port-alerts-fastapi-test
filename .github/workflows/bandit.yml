@@ -28,7 +28,12 @@ jobs:
 
       - name: Run Bandit security analysis
         run: |
-          bandit -r . -f sarif -o results.sarif -v
+          bandit -r . -f json -o bandit-output.json -v
+
+      - name: Convert Bandit output to SARIF
+        run: |
+          pip install bandit-sarif
+          bandit-sarif bandit-output.json results.sarif
 
       - name: Upload Bandit results to GitHub
         uses: github/codeql-action/upload-sarif@v2
