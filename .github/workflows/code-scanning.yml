@@ -1,3 +1,11 @@
+name: Code Scanning
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
 jobs:
   analyze:
     name: Analyze
@@ -25,4 +33,4 @@ jobs:
 
       - name: Run flake8
         run: |
-          flake8 main.py --ignore=E501
+          flake8 main.py
