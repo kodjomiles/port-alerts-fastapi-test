@@ -23,6 +23,7 @@ async def read_root():
 
 
 def get_user_data(username):
+    print(username)
     conn = sqlite3.connect("example.db")
     cursor = conn.cursor()
     query = f"SELECT * FROM users WHERE username = '{username}'"  # Vulnerable to SQL injection
