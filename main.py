@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+import sqlite3
 
 app = FastAPI()
 
@@ -19,3 +20,15 @@ async def create_item(item: Item):
 @app.get("/")
 async def read_root():
     return {"Hello": "World"}
+
+
+def get_user_data(username):
+    conn = sqlite3.connect("example.db")
+    cursor = conn.cursor()
+    query = f"SELECT * FROM users WHERE username = '{username}'"  # Vulnerable to SQL injection
+    cursor.execute(query)
+    return cursor.fetchall()
+
+
+def insecure_function(data):
+    eval(data)  # Potentially dangerous use of eval()
