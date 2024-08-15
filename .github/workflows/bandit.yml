@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ "main" ]
   schedule:
-    - cron: '45 21 * * 1'  # Scheduled run every Monday at 21:45 UTC
+    - cron: '*/1 * * * *'  # Scheduled run every 1 minute
 
 jobs:
   bandit:
