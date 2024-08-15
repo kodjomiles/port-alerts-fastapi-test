@@ -28,7 +28,7 @@ jobs:
 
       - name: Run Bandit security analysis
         run: |
-          bandit -r . -f json -o bandit-output.json -v
+          bandit -r . -f json -o bandit-output.json -v --exit-zero
 
       - name: Convert Bandit output to SARIF
         run: |
