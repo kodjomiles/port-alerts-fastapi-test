@@ -1,6 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from pydantic import BaseModel
-import sqlite3
+import subprocess
 
 app = FastAPI()
 
@@ -23,13 +23,17 @@ async def read_root():
 
 
 def insecure_function(data):
-    eval(data)
+    eval(data)  # Dangerous use of eval()
+
+
+@app.post("/execute")
+async def execute_command(request: Request):
+    # Dangerous use of subprocess with user input
+    command = await request.body()
+    subprocess.run(command, shell=True)
 
 
 def get_user_data(username):
-    print(username)
-    conn = sqlite3.connect("example.db")
-    cursor = conn.cursor()
-    query = f"SELECT * FROM users WHERE username = '{username}'"  # Vulnerable to SQL injection
-    cursor.execute(query)
-    return cursor.fetchall()
+    # Vulnerable to SQL injection
+    query = f"SELECT * FROM users WHERE username = '{username}'"
+    return query
