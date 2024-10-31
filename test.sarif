@@ -1,0 +1,50 @@
+{
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "CodeQL",
+          "rules": [
+            {
+              "id": "SEC001",
+              "name": "SQL Injection",
+              "shortDescription": { "text": "Potential SQL Injection vulnerability." }
+            },
+            {
+              "id": "SEC002",
+              "name": "XSS Vulnerability",
+              "shortDescription": { "text": "Potential Cross-Site Scripting vulnerability." }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "SEC001",
+          "message": { "text": "Unsanitized SQL query." },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": "src/database.js" },
+                "region": { "startLine": 42 }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "SEC002",
+          "message": { "text": "Unescaped user input in HTML." },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": "src/view.js" },
+                "region": { "startLine": 58 }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
